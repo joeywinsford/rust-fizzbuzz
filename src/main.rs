@@ -37,17 +37,22 @@ fn to_fizzbuzz(number: i32) -> FizzBuzzResult {
 }
 
 macro_rules! fizz_tests {
-    ($($testname:ident: $number:expr ),*) => {
+    ($($testname:ident: $params:expr ),*) => {
         $(
             #[test]
             fn $testname() {
-                assert_eq!(FizzBuzzResult::Fizz, to_fizzbuzz($number));
+                let (n, expected) = $params;
+                assert_eq!(expected, to_fizzbuzz(n));
             }
         )*
     };
 }
 
 fizz_tests! {
-    fizz_for_3: 3,
-    fizz_for_6: 6 
+    //val_for_1: (1, 1),
+    fizz_for_3: (3, FizzBuzzResult::Fizz),
+    buzz_for_5: (5, FizzBuzzResult::Buzz),
+    fizz_for_6: (6, FizzBuzzResult::Fizz),
+    buzz_for_10: (10, FizzBuzzResult::Buzz),
+    fizzbuzz_for_15: (15, FizzBuzzResult::FizzBuzz)
 }
