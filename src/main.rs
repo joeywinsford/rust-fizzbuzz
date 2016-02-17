@@ -1,4 +1,7 @@
+extern crate core;
+
 use std::fmt;
+use core::cmp;
 
 fn main() {
     for n in 1..21 {
@@ -7,7 +10,6 @@ fn main() {
     }
 }
 
-#[derive(PartialEq)]
 #[derive(Debug)]
 enum FizzBuzzResult {
     Fizz,
@@ -26,13 +28,25 @@ impl fmt::Display for FizzBuzzResult {
         }
     }
 }
+impl cmp::PartialEq for FizzBuzzResult {
+    fn eq(&self, other: &FizzBuzzResult) -> bool {
+        match (self, other) {
+            (&FizzBuzzResult::Fizz, &FizzBuzzResult::Fizz)      => true,
+            (&FizzBuzzResult::Buzz, &FizzBuzzResult::Buzz)      => true,
+            (&FizzBuzzResult::FizzBuzz, &FizzBuzzResult::FizzBuzz) => true,
+            (&FizzBuzzResult::Value(n), &FizzBuzzResult::Value(m)) => n == m,
+            _ => false
+        }
+    }
+}
+
 
 fn to_fizzbuzz(number: i32) -> FizzBuzzResult {
     match number {
         number if number % (3 * 5) == 0 => FizzBuzzResult::FizzBuzz,
         number if number % 3 == 0       => FizzBuzzResult::Fizz,
         number if number % 5 == 0       => FizzBuzzResult::Buzz,
-        _   => FizzBuzzResult::Value(number),
+         _   => FizzBuzzResult::Value(number),
     }
 }
 
