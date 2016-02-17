@@ -7,6 +7,8 @@ fn main() {
     }
 }
 
+#[derive(PartialEq)]
+#[derive(Debug)]
 enum FizzBuzzResult {
     Fizz,
     Buzz,
@@ -32,4 +34,9 @@ fn to_fizzbuzz(number: i32) -> FizzBuzzResult {
         number if number % 5 == 0       => FizzBuzzResult::Buzz,
         _   => FizzBuzzResult::Value(number),
     }
+}
+
+#[test]
+fn multiple_of_3_fizzes() {
+    assert_eq!(FizzBuzzResult::Fizz, to_fizzbuzz(3));
 }
