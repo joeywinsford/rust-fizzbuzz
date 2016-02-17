@@ -36,7 +36,18 @@ fn to_fizzbuzz(number: i32) -> FizzBuzzResult {
     }
 }
 
-#[test]
-fn multiple_of_3_fizzes() {
-    assert_eq!(FizzBuzzResult::Fizz, to_fizzbuzz(3));
+macro_rules! fizz_tests {
+    ($($testname:ident: $number:expr ),*) => {
+        $(
+            #[test]
+            fn $testname() {
+                assert_eq!(FizzBuzzResult::Fizz, to_fizzbuzz($number));
+            }
+        )*
+    };
+}
+
+fizz_tests! {
+    fizz_for_3: 3,
+    fizz_for_6: 6 
 }
