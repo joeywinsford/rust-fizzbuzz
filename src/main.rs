@@ -63,7 +63,8 @@ macro_rules! fizz_tests {
 }
 
 fizz_tests! {
-    //val_for_1: (1, 1),
+    val_for_1: (1, FizzBuzzResult::Value(1)),
+    val_for_2: (2, FizzBuzzResult::Value(2)),
     fizz_for_3: (3, FizzBuzzResult::Fizz),
     buzz_for_5: (5, FizzBuzzResult::Buzz),
     fizz_for_6: (6, FizzBuzzResult::Fizz),
